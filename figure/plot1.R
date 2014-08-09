@@ -1,5 +1,8 @@
 # read txt file into table <dat>
-dat <- read.table("household_power_consumption.txt", header=TRUE, sep= ";", col.names = c("Date","Time","Global_active_power","Global_reactive_power","Voltage","Global_intensity","Sub_metering_1","Sub_metering_2","Sub_metering_3"), skip=66637, nrows=2879)
+data <- read.table("household_power_consumption.txt", header=TRUE, sep= ";", col.names = c("Date","Time","Global_active_power","Global_reactive_power","Voltage","Global_intensity","Sub_metering_1","Sub_metering_2","Sub_metering_3"), skip=66637, nrows=2879, na.strings = "?")
+# clean data
+c <- complete.cases(data)
+dat <- data[c,]
 
 # transform date
 dat$Date <- as.Date(dat$Date, "%d/%m/%Y")
